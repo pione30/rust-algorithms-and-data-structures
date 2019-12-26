@@ -19,22 +19,16 @@ where
 
     pub fn add(&mut self, new_val: T) {
         if new_val <= self.val {
-            match &mut self.left {
-                None => {
-                    self.left = Some(Box::new(BinarySearchTree::new(new_val)));
-                }
-                Some(box_bst) => {
-                    box_bst.add(new_val);
-                }
+            if let Some(bst) = &mut self.left {
+                bst.add(new_val);
+            } else {
+                self.left = Some(Box::new(BinarySearchTree::new(new_val)));
             }
         } else {
-            match &mut self.right {
-                None => {
-                    self.right = Some(Box::new(BinarySearchTree::new(new_val)));
-                }
-                Some(box_bst) => {
-                    box_bst.add(new_val);
-                }
+            if let Some(bst) = &mut self.right {
+                bst.add(new_val);
+            } else {
+                self.right = Some(Box::new(BinarySearchTree::new(new_val)));
             }
         }
     }
