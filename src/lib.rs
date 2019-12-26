@@ -19,16 +19,19 @@ where
 
     pub fn add(&mut self, new_val: T) {
         if new_val <= self.val {
-            if let Some(bst) = &mut self.left {
-                bst.add(new_val);
-            } else {
-                self.left = Some(Box::new(BinarySearchTree::new(new_val)));
-            }
+            Self::add_value_into_one_side(&mut self.left, new_val);
         } else {
-            if let Some(bst) = &mut self.right {
+            Self::add_value_into_one_side(&mut self.right, new_val);
+        }
+    }
+
+    fn add_value_into_one_side(branch: &mut Option<Box<BinarySearchTree<T>>>, new_val: T) {
+        match branch {
+            Some(bst) => {
                 bst.add(new_val);
-            } else {
-                self.right = Some(Box::new(BinarySearchTree::new(new_val)));
+            }
+            None => {
+                *branch = Some(Box::new(BinarySearchTree::new(new_val)));
             }
         }
     }
