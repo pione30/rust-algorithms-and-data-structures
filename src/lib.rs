@@ -38,6 +38,26 @@ where
             }
         }
     }
+
+    pub fn contains(&self, val: &T) -> bool {
+        if self.val == *val {
+            true
+        } else {
+            if let Some(bst) = &self.left {
+                if bst.contains(val) {
+                    return true;
+                }
+            };
+
+            if let Some(bst) = &self.right {
+                if bst.contains(val) {
+                    return true;
+                }
+            };
+
+            false
+        }
+    }
 }
 
 #[cfg(test)]
@@ -82,5 +102,26 @@ mod tests {
         bst2.add(5);
 
         assert_eq!(bst1, bst2);
+    }
+
+    #[test]
+    fn contains() {
+        let mut bst = BinarySearchTree::new(8);
+        bst.add(5);
+        bst.add(10);
+        bst.add(5);
+        bst.add(3);
+        bst.add(5);
+        bst.add(6);
+        bst.add(8);
+        bst.add(9);
+        bst.add(15);
+
+        assert_eq!(bst.contains(&0), false);
+        assert_eq!(bst.contains(&5), true);
+        assert_eq!(bst.contains(&10), true);
+        assert_eq!(bst.contains(&9), true);
+        assert_eq!(bst.contains(&15), true);
+        assert_eq!(bst.contains(&16), false);
     }
 }
