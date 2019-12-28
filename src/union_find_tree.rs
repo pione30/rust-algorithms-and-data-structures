@@ -51,3 +51,28 @@ impl UnionFindTree {
         self.find_root_id(node_id_x) == self.find_root_id(node_id_y)
     }
 }
+
+mod test {
+    use super::UnionFindTree;
+
+    #[test]
+    fn it_works() {
+        let mut uft = UnionFindTree::new(8);
+
+        uft.unite_group(1, 2);
+        uft.unite_group(1, 5);
+        assert!(uft.same_group(1, 2));
+        assert!(uft.same_group(1, 5));
+        assert!(!uft.same_group(1, 3));
+
+        uft.unite_group(6, 4);
+        uft.unite_group(4, 7);
+        assert!(uft.same_group(6, 4));
+        assert!(uft.same_group(6, 7));
+        assert!(!uft.same_group(2, 4));
+
+        uft.unite_group(1, 7);
+        assert!(uft.same_group(1, 7));
+        assert!(uft.same_group(2, 4));
+    }
+}
