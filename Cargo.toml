@@ -1,5 +1,5 @@
 [package]
-name = "binary_search_tree"
+name = "rust_algorithms_and_data_structures"
 version = "0.1.0"
 authors = ["pione30 <g.pionelish30@gmail.com>"]
 edition = "2018"
