@@ -11,7 +11,7 @@ impl UnionFindTree {
 
         for i in 0..nodes_num {
             parent.push(i);
-            rank.push(0)
+            rank.push(0);
         }
 
         Self {
