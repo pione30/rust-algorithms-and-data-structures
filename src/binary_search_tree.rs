@@ -39,19 +39,17 @@ where
     pub fn contains(&self, val: &T) -> bool {
         if self.val == *val {
             true
+        } else if *val < self.val && self.left.is_some() {
+            self.left
+                .as_ref()
+                .expect("self.left should be Some")
+                .contains(val)
+        } else if self.val < *val && self.right.is_some() {
+            self.right
+                .as_ref()
+                .expect("self.right should be Some")
+                .contains(val)
         } else {
-            if let Some(bst) = &self.left {
-                if bst.contains(val) {
-                    return true;
-                }
-            };
-
-            if let Some(bst) = &self.right {
-                if bst.contains(val) {
-                    return true;
-                }
-            };
-
             false
         }
     }
@@ -115,6 +113,7 @@ mod tests {
         bst.add(15);
 
         assert_eq!(bst.contains(&0), false);
+        assert_eq!(bst.contains(&5), true);
         assert_eq!(bst.contains(&5), true);
         assert_eq!(bst.contains(&10), true);
         assert_eq!(bst.contains(&9), true);
