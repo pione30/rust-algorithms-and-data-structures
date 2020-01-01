@@ -53,6 +53,54 @@ where
             false
         }
     }
+
+    pub fn delete(&mut self, val: &T) {
+        if self.val == *val {
+            // such a node should not be deleted
+            return;
+        }
+        let next_node = if *val < self.val {
+            &mut self.left
+        } else {
+            &mut self.right
+        };
+
+        if let Some(bst) = next_node {
+            if bst.val == *val {
+                match bst.left.as_mut() {
+                    None => {
+                        *next_node = bst.right.take();
+                    }
+                    Some(bst_left) => match bst_left.right.as_mut() {
+                        None => {
+                            bst_left.right = bst.right.take();
+                            *next_node = bst.left.take();
+                        }
+                        Some(_) => {
+                            let mut aiming_node = bst_left;
+
+                            while let Some(right) = aiming_node.right.as_mut() {
+                                if right.right.is_none() {
+                                    let temp_right = right.left.take();
+
+                                    right.left = bst.left.take();
+                                    right.right = bst.right.take();
+                                    *next_node = aiming_node.right.take();
+
+                                    aiming_node.right = temp_right;
+
+                                    break;
+                                }
+                                aiming_node = right;
+                            }
+                        }
+                    },
+                }
+            } else {
+                bst.delete(val);
+            }
+        }
+    }
 }
 
 #[cfg(test)]
