@@ -4,7 +4,7 @@ pub struct Edge {
     pub cost: isize,
 }
 
-const INF: isize = isize::max_value();
+const INF: isize = isize::max_value() / 3;
 
 pub fn shortest_path(start: usize, num_of_vertexes: usize, edges: &Vec<Edge>) -> Vec<isize> {
     if start >= num_of_vertexes {
