@@ -52,6 +52,7 @@ impl UnionFindTree {
     }
 }
 
+#[cfg(test)]
 mod test {
     use super::UnionFindTree;
 

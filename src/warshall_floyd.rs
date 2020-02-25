@@ -10,6 +10,7 @@ pub fn warshall_floyd(num_of_vertexes: usize, dists: &mut Vec<Vec<isize>>) {
     }
 }
 
+#[cfg(test)]
 mod test {
     use super::*;
 

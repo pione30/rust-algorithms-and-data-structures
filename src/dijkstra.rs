@@ -66,6 +66,7 @@ pub fn shortest_path(adj_list: &Vec<Vec<Edge>>, start: usize) -> Vec<usize> {
     dist
 }
 
+#[cfg(test)]
 mod test {
     use super::*;
 

@@ -33,6 +33,7 @@ pub fn shortest_path(start: usize, num_of_vertexes: usize, edges: &Vec<Edge>) ->
     dists
 }
 
+#[cfg(test)]
 mod test {
     use super::*;
 
